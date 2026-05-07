@@ -38,7 +38,7 @@ export function Header({ perfil }: { perfil: UsuarioPerfil }) {
         </Badge>
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger render={
             <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Avatar className="w-8 h-8">
                 <AvatarFallback className="bg-blue-100 text-blue-700 text-sm font-bold">
@@ -49,13 +49,13 @@ export function Header({ perfil }: { perfil: UsuarioPerfil }) {
                 {perfil.nombre_completo}
               </span>
             </button>
-          </DropdownMenuTrigger>
+          } />
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuLabel className="text-xs text-slate-500">Mi cuenta</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem render={
               <Link href="/dashboard/perfil">👤 Mi perfil</Link>
-            </DropdownMenuItem>
+            } />
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout} className="text-red-600">
               🚪 Cerrar sesión

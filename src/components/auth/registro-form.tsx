@@ -88,7 +88,7 @@ export function RegistroForm() {
         </div>
         <div className="space-y-2">
           <Label>Rol en el sistema</Label>
-          <Select value={form.rol} onValueChange={v => setForm(p => ({ ...p, rol: v }))}>
+          <Select value={form.rol} onValueChange={v => setForm(p => ({ ...p, rol: v as string }))}>
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>

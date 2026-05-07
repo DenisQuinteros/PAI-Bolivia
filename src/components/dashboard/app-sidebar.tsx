@@ -88,15 +88,15 @@ export function AppSidebar({ rol, nombreCompleto }: Props) {
               {grupo.items.map(item => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
-                    asChild
+                    render={
+                      <Link href={item.href} className="flex items-center gap-3 text-sm">
+                        <span>{item.icon}</span>
+                        <span>{item.titulo}</span>
+                      </Link>
+                    }
                     isActive={pathname === item.href}
                     className="px-4 py-2"
-                  >
-                    <Link href={item.href} className="flex items-center gap-3 text-sm">
-                      <span>{item.icon}</span>
-                      <span>{item.titulo}</span>
-                    </Link>
-                  </SidebarMenuButton>
+                  />
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

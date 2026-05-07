@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const porPagina = 20
   const desde = (pagina - 1) * porPagina
 
-  let query = supabase
+  let query: any = (supabase as any)
     .from('paciente')
     .select('*, municipio:municipio_residencia(nombre_municipio)', { count: 'exact' })
     .eq('eliminado' as any, false)

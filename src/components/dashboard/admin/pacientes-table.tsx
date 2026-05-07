@@ -125,7 +125,7 @@ export function AdminPacientesTable({ pacientes: inicial, rolUsuario }: Props) {
                   {puedeEliminar && (
                     <TableCell className="text-right">
                       <AlertDialog>
-                        <AlertDialogTrigger asChild>
+                        <AlertDialogTrigger render={
                           <Button
                             size="sm"
                             variant="outline"
@@ -134,7 +134,7 @@ export function AdminPacientesTable({ pacientes: inicial, rolUsuario }: Props) {
                           >
                             Eliminar
                           </Button>
-                        </AlertDialogTrigger>
+                        } />
                         <AlertDialogContent>
                           <AlertDialogHeader>
                             <AlertDialogTitle>¿Eliminar paciente?</AlertDialogTitle>

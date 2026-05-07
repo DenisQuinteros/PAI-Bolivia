@@ -102,7 +102,7 @@ export function UsuariosTable({ usuarios: inicial }: { usuarios: Usuario[] }) {
               <TableCell>
                 <Select
                   value={u.rol}
-                  onValueChange={v => cambiarRol(u.id, v)}
+                  onValueChange={v => cambiarRol(u.id, v as string)}
                   disabled={loading === u.id}
                 >
                   <SelectTrigger className="w-36 h-8 text-xs">
@@ -139,7 +139,7 @@ export function UsuariosTable({ usuarios: inicial }: { usuarios: Usuario[] }) {
                     {u.activo ? 'Desactivar' : 'Activar'}
                   </Button>
                   <AlertDialog>
-                    <AlertDialogTrigger asChild>
+                    <AlertDialogTrigger render={
                       <Button
                         size="sm"
                         variant="outline"
@@ -148,7 +148,7 @@ export function UsuariosTable({ usuarios: inicial }: { usuarios: Usuario[] }) {
                       >
                         Eliminar
                       </Button>
-                    </AlertDialogTrigger>
+                    } />
                     <AlertDialogContent>
                       <AlertDialogHeader>
                         <AlertDialogTitle>¿Eliminar usuario?</AlertDialogTitle>
