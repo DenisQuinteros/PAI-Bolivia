@@ -24,8 +24,7 @@ export function Header({ perfil }: { perfil: UsuarioPerfil }) {
 
   async function handleLogout() {
     await supabase.auth.signOut()
-    router.push('/login')
-    router.refresh()
+    window.location.href = '/login'
   }
 
   return (
@@ -33,32 +32,47 @@ export function Header({ perfil }: { perfil: UsuarioPerfil }) {
       <SidebarTrigger className="text-slate-500 hover:text-slate-800" />
 
       <div className="flex items-center gap-3">
-        <Badge className={`text-xs capitalize ${colorRol[perfil.rol] ?? ''}`}>
+        <Badge className={`text-xs capitalize ${colorRol[perfil.rol] ?? 'bg-slate-100 text-slate-700'}`}>
           {perfil.rol}
         </Badge>
 
         <DropdownMenu>
           <DropdownMenuTrigger render={
-            <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <button
+              type="button"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity outline-none"
+            >
               <Avatar className="w-8 h-8">
                 <AvatarFallback className="bg-blue-100 text-blue-700 text-sm font-bold">
-                  {perfil.nombre_completo.charAt(0).toUpperCase()}
+                  {perfil.nombre_completo?.charAt(0)?.toUpperCase() ?? 'U'}
                 </AvatarFallback>
               </Avatar>
               <span className="text-sm font-medium text-slate-700 hidden md:block">
                 {perfil.nombre_completo}
               </span>
+              <span className="text-slate-400 text-xs">▼</span>
             </button>
           } />
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuLabel className="text-xs text-slate-500">Mi cuenta</DropdownMenuLabel>
+
+          <DropdownMenuContent align="end" className="w-52" forceMount>
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium">{perfil.nombre_completo}</p>
+                <p className="text-xs text-slate-400 capitalize">{perfil.rol}</p>
+              </div>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem render={
-              <Link href="/dashboard/perfil">👤 Mi perfil</Link>
+              <Link href="/dashboard/perfil" className="cursor-pointer w-full flex items-center gap-2">
+                <span>👤</span> Mi perfil
+              </Link>
             } />
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-              🚪 Cerrar sesión
+            <DropdownMenuItem
+              onClick={handleLogout}
+              className="text-red-600 cursor-pointer focus:text-red-600 focus:bg-red-50 flex items-center gap-2"
+            >
+              <span>🚪</span> Cerrar sesión
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
