@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
 
   const { data: registros, error } = await supabase
     .from('registro_vacunacion')
@@ -13,7 +14,6 @@ export async function GET() {
       vacuna:vacuna_id (vacuna_nombre, grupo_pai),
       establecimiento:establecimiento_id (nombre_establecimiento)
     `)
-    .eq('registrado_por', user!.id)
     .order('fecha_vacunacion', { ascending: false })
     .limit(100)
 
@@ -24,6 +24,7 @@ export async function GET() {
 export async function POST(request: Request) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   const body = await request.json()
 
   const timestamp = Date.now().toString().slice(-8)
@@ -34,11 +35,10 @@ export async function POST(request: Request) {
     .insert({
       ...body,
       registro_id,
-      registrado_por: user!.id,
+      registrado_por: user.id,
       origen_datos: 'Manual',
     })
-    .select()
-    .single()
+    .select().single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ registro: data })

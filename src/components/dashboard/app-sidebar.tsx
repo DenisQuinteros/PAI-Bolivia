@@ -35,9 +35,11 @@ const menuPorRol: Record<Rol, { label: string; items: { href: string; icon: stri
     {
       label: 'General',
       items: [
-        { href: '/dashboard',                  icon: '🏠', titulo: 'Inicio'        },
-        { href: '/dashboard/supervisor',       icon: '📋', titulo: 'Mi Panel'      },
-        { href: '/dashboard/reportes',         icon: '📊', titulo: 'Estadísticas'  },
+        { href: '/dashboard',            icon: '🏠', titulo: 'Inicio'       },
+        { href: '/dashboard/supervisor', icon: '📋', titulo: 'Mi Panel'     },
+        { href: '/dashboard/admin/pacientes',    icon: '👤', titulo: 'Pacientes'   },
+        { href: '/dashboard/admin/vacunaciones', icon: '💉', titulo: 'Vacunaciones' },
+        { href: '/dashboard/reportes',   icon: '📊', titulo: 'Estadísticas' },
       ],
     },
   ],

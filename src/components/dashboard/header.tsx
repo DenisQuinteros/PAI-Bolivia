@@ -5,7 +5,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuGroup,
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
@@ -55,12 +55,14 @@ export function Header({ perfil }: { perfil: UsuarioPerfil }) {
           } />
 
           <DropdownMenuContent align="end" className="w-52" forceMount>
-            <DropdownMenuLabel className="font-normal">
-              <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium">{perfil.nombre_completo}</p>
-                <p className="text-xs text-slate-400 capitalize">{perfil.rol}</p>
-              </div>
-            </DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium">{perfil.nombre_completo}</p>
+                  <p className="text-xs text-slate-400 capitalize">{perfil.rol}</p>
+                </div>
+              </DropdownMenuLabel>
+            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem render={
               <Link href="/dashboard/perfil" className="cursor-pointer w-full flex items-center gap-2">
