@@ -4,6 +4,12 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   const supabase = await createClient()
 
+  // Verificar autenticación
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+  }
+
   const [
     { data: vacunas },
     { data: establecimientos },
